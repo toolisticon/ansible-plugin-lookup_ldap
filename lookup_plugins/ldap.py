@@ -127,7 +127,7 @@ class LookupModule(LookupBase):
 
         try:
             ctx = self.render_template(variables, ctx)
-        except Exception, e:
+        except Exception as e:
             raise errors.AnsibleError(
                 'exception while preparing LDAP parameters: %s' % e)
         self._display.vv("LDAP config: %s" % ctx)
@@ -177,7 +177,7 @@ class LookupModule(LookupBase):
             else:
                 # bindpw may be an AnsibleVaultEncryptedUnicode, which ldap doesn't
                 # know anything about, so cast to unicode explicitly now.
-                
+
                 lo.simple_bind_s(ctx.get('binddn', ''), unicode(ctx.get('bindpw', '')))
 
         ret = []
